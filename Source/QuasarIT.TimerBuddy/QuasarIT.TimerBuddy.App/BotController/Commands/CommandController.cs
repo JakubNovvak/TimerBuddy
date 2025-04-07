@@ -26,20 +26,22 @@ namespace QuasarIT.TimerBuddy.App.BotController.Commands
                 .Build();
 
             var command2 = new SlashCommandBuilder()
-                .WithName("timer-stop")
-                .WithDescription("Zatrzymuje wszystkie uruchomione liczniki")
+                .WithName("timer-print-1")
+                .WithDescription("The bot prints number \"1\"")
                 .Build();
 
             var command3 = new SlashCommandBuilder()
                 .WithName("timer-hello")
-                .WithDescription("Prints \"Hello World!\"")
+                .WithDescription("The bot prints \"Hello World!\"")
                 .Build();
 
             try
             {
                 await guild.CreateApplicationCommandAsync(command1);
+                await guild.CreateApplicationCommandAsync(command2);
                 await guild.CreateApplicationCommandAsync(command3);
                 Console.WriteLine($"> Command '/timer-start' registered on a server: {guild.Name}");
+                Console.WriteLine($"> Command '/timer-print-1' registered on a server: {guild.Name}");
                 Console.WriteLine($"> Command '/timer-hello' registered on a server: {guild.Name}");
             }
             catch (Exception ex)
@@ -54,6 +56,7 @@ namespace QuasarIT.TimerBuddy.App.BotController.Commands
             {
                 case "timer-hello":
                     await command.RespondAsync($"Hello World! 👋");
+                    
                     break;
 
                 case "timer-start":
@@ -70,6 +73,11 @@ namespace QuasarIT.TimerBuddy.App.BotController.Commands
 
                     var timer = new PingTimer(command, time, user);
                     _activeTimers[command.Id] = timer;
+
+                    break;
+
+                case "timer-print-1":
+                    await command.RespondAsync($"1");
 
                     break;
 
