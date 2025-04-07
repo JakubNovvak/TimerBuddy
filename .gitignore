@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# App specific files
+Source/QuasarIT.TimerBuddy/QuasarIT.TimerBuddy.App/Config/config.json
+
 # User-specific files
 *.rsuser
 *.suo
@@ -398,3 +401,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Source/QuasarIT.TimerBuddy/QuasarIT.TimerBuddy.App/Config/config.json
