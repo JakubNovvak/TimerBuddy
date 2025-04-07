@@ -401,4 +401,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/Source/QuasarIT.TimerBuddy/QuasarIT.TimerBuddy.App/Config/config.json
+#/Source/QuasarIT.TimerBuddy/QuasarIT.TimerBuddy.App/Config/config.json
