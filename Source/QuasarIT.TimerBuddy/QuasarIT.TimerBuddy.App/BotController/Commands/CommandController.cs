@@ -1,5 +1,6 @@
 ﻿using Discord.WebSocket;
 using Discord;
+using static QuasarIT.TimerBuddy.App.Helpers.TimerStringDecorators;
 
 namespace QuasarIT.TimerBuddy.App.BotController.Commands
 {
@@ -63,7 +64,7 @@ namespace QuasarIT.TimerBuddy.App.BotController.Commands
                         .WithButton("⏹️ Stop", customId: $"stop_timer_{command.Id}", ButtonStyle.Primary);
 
                     var sentMessage = command.RespondAsync(
-                        $"Hurry up {user.Mention}! Remaining time: `{time:D2}:00`",
+                        $"Hurry up {user.Mention}! Remaining time: `{FormatTimeString(TimeSpan.FromMinutes(time))}`",
                         components: builder.Build()
                        );
 

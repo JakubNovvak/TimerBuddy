@@ -1,7 +1,7 @@
 ﻿using Discord.WebSocket;
 using Timer = System.Timers.Timer;
 using ElapsedEventArgs = System.Timers.ElapsedEventArgs;
-using Discord;
+using static QuasarIT.TimerBuddy.App.Helpers.TimerStringDecorators;
 
 namespace QuasarIT.TimerBuddy.App.BotController
 {
@@ -34,7 +34,7 @@ namespace QuasarIT.TimerBuddy.App.BotController
                 return;
             }
 
-            await _command.ModifyOriginalResponseAsync(msg => msg.Content = $"Hurry up {_user.Mention}! Remaining time: `{_remainingTime.Minutes:D2}:{_remainingTime.Seconds:D2}`");
+            await _command.ModifyOriginalResponseAsync(msg => msg.Content = $"Hurry up {_user.Mention}! Remaining time: `{FormatTimeString(_remainingTime)}`");
         }
     }
 }
