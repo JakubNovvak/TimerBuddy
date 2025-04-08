@@ -28,7 +28,7 @@ namespace QuasarIT.TimerBuddy.App.BotController
         {
             _remainingTime -= TimeSpan.FromMilliseconds(Interval);
 
-            if (_remainingTime.TotalMilliseconds != 0)
+            if (_remainingTime.TotalMilliseconds == 0)
             {
                 try
                 {
