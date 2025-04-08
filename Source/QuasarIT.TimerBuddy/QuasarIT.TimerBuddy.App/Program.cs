@@ -10,7 +10,7 @@ namespace QuasarIT.TimerBuddy.App
     {
         static async Task Main(string[] args)
         {
-
+            Console.WriteLine();
             var botToken = new BotConfig();
             await botToken.ReadJSON();
             var timerBuddyBot = new TimerBuddyBot(botToken.DiscordBotToken!);

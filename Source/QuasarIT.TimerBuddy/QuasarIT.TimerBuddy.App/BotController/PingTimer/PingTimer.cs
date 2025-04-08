@@ -28,8 +28,12 @@ namespace QuasarIT.TimerBuddy.App.BotController
 
             if (_remainingTime.TotalMilliseconds == 0)
             {
-                await _command.ModifyOriginalResponseAsync(msg => msg.Content = $"Hurry up {_user.Mention}! Remaining time: `00:00`");
-                await _command.FollowupAsync($"⏰ Time's up! Where are you {_user.Mention}? 👀");
+                var channel = _command.Channel;
+
+                await _command.DeleteOriginalResponseAsync();
+                await channel.SendMessageAsync($"⏰ Time's up! Where are you {_user.Mention}? 👀");
+                await channel.SendMessageAsync("https://tenor.com/Jc4z.gif");
+
                 Stop();
                 return;
             }

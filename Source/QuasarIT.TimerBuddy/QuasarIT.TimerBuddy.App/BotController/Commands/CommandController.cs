@@ -70,7 +70,7 @@ namespace QuasarIT.TimerBuddy.App.BotController.Commands
                         $"Hurry up {user.Mention}! Remaining time: `{FormatTimeString(TimeSpan.FromMinutes(time))}`",
                         components: builder.Build()
                        );
-
+                    
                     var timer = new PingTimer(command, time, user);
                     _activeTimers[command.Id] = timer;
 
@@ -98,7 +98,7 @@ namespace QuasarIT.TimerBuddy.App.BotController.Commands
                     await component.UpdateAsync(msg =>
                     {
                         msg.Content = $"⏹️ Timer stopped by {component.User.Mention}";
-                        msg.Components = new ComponentBuilder().Build(); // Usuwa przycisk
+                        msg.Components = new ComponentBuilder().Build();
                     });
                 }
             }
