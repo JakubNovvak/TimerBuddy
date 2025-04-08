@@ -2,6 +2,8 @@
 using Timer = System.Timers.Timer;
 using ElapsedEventArgs = System.Timers.ElapsedEventArgs;
 using static QuasarIT.TimerBuddy.App.Helpers.TimerStringDecorators;
+using Microsoft.VisualBasic;
+using Discord;
 
 namespace QuasarIT.TimerBuddy.App.BotController
 {
@@ -26,13 +28,33 @@ namespace QuasarIT.TimerBuddy.App.BotController
         {
             _remainingTime -= TimeSpan.FromMilliseconds(Interval);
 
-            if (_remainingTime.TotalMilliseconds == 0)
+            if (_remainingTime.TotalMilliseconds != 0)
             {
-                var channel = _command.Channel;
+                try
+                {
+                    var channel = _command.Channel;
 
-                await _command.DeleteOriginalResponseAsync();
-                await channel.SendMessageAsync($"⏰ Time's up! Where are you {_user.Mention}? 👀");
-                await channel.SendMessageAsync("https://tenor.com/Jc4z.gif");
+                    Console.WriteLine("> Channel: " + _command.Channel);
+
+                    await channel.SendMessageAsync($"⏰ Tick tock {_user.Mention}!");
+                    await channel.SendMessageAsync("https://tenor.com/Jc4z.gif");
+                    await _command.DeleteOriginalResponseAsync();
+                }
+                catch (Discord.Net.HttpException ex)
+                {
+                    Console.WriteLine(ex.Message);
+
+                    if((int)ex.HttpCode == 403 && (int)ex.DiscordCode == 50001)
+                        await _command.ModifyOriginalResponseAsync(msg => {
+                            msg.Content = "❌ I don't have enough permissions, to send standalone messages in this channel.";
+                            msg.Components = new ComponentBuilder().Build();
+                        });
+                    else
+                        await _command.ModifyOriginalResponseAsync(msg => {
+                            msg.Content = "❌ There was an unexpected error while stopping the timer.";
+                            msg.Components = new ComponentBuilder().Build();
+                        });
+                }
 
                 Stop();
                 return;
